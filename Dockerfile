@@ -2,15 +2,14 @@
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Fleet Inventory System/FleetInventorySystem.csproj", "FleetInventorySystem/"]
+COPY ["FleetInventorySystem/FleetInventorySystem.csproj", "FleetInventorySystem/"]
 RUN dotnet restore "FleetInventorySystem/FleetInventorySystem.csproj"
 COPY . .
-WORKDIR "/src/Fleet Inventory System"
+WORKDIR "/src/FleetInventorySystem"
 RUN dotnet build "FleetInventorySystem.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
@@ -22,4 +21,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
+ENV ASPNETCORE_URLS=http://+:8080
 ENTRYPOINT ["dotnet", "FleetInventorySystem.dll"]

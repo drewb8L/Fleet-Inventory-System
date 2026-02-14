@@ -1,0 +1,14 @@
+﻿services:
+    fleet-api:
+        image: fleet-inventory-system
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"  # HTTP mapping (Host:Container)
+            - "8081:8081"  # HTTPS mapping
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_HTTP_PORTS=8080
+            - ASPNETCORE_HTTPS_PORTS=8081
+        restart: unless-stopped
