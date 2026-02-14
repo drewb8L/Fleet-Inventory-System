@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fleet Inventory System", "Fleet Inventory System\Fleet Inventory System.csproj", "{B47DC31C-AB9F-41AA-B4B3-FA9691AAA57D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB7BBA04-6D73-45BA-A0F3-F56E1881C861}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fleet Inventory Tests", "Fleet Inventory Tests\Fleet Inventory Tests.csproj", "{D5D3DF81-E18A-430D-B9AB-CEBF37CC79D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B47DC31C-AB9F-41AA-B4B3-FA9691AAA57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B47DC31C-AB9F-41AA-B4B3-FA9691AAA57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B47DC31C-AB9F-41AA-B4B3-FA9691AAA57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B47DC31C-AB9F-41AA-B4B3-FA9691AAA57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5D3DF81-E18A-430D-B9AB-CEBF37CC79D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5D3DF81-E18A-430D-B9AB-CEBF37CC79D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5D3DF81-E18A-430D-B9AB-CEBF37CC79D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5D3DF81-E18A-430D-B9AB-CEBF37CC79D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
