@@ -1,0 +1,7 @@
+﻿services:
+  fleet inventory systemfleetinventorysystem:
+    image: fleet inventory systemfleetinventorysystem
+    build:
+      context: .
+      dockerfile: Fleet Inventory System/Dockerfile
+
