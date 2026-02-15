@@ -1,0 +1,44 @@
+name: Docker Integration Test
+
+on:
+    push:
+        branches: [ "main" ]
+    pull_request:
+        branches: [ "main" ]
+
+jobs:
+    smoke-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+            - name: Start Containers
+              run: docker compose up -d --build
+              env:
+                  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+                  DB_CONNECTION_STRING:${{ secrets.DB_CONNECTION_STRING }}
+
+            - name: Wait for DB Health
+              run: |
+                  echo "Waiting for postgres to be healthy..."
+                  timeout 30s bash -c 'until docker inspect --format="{{.State.Health.Status}}" fleet_postgres_container | grep -q "healthy"; do sleep 1; done'
+
+            - name: Apply Migrations
+              run: |
+                  # Option A: If you have the dotnet tool in the runner
+                  dotnet tool install --global dotnet-ef
+                  dotnet ef database update --connection "Host=localhost;Port=5432;Database=fleet_inventory;Username=fleet_dev;Password=secret_password_123"
+
+            - name: Verify API <-> DB Connectivity
+              run: |
+                  echo "Polling API health endpoint..."
+                  # Retry for 30 seconds
+                  timeout 30s bash -c 'until curl --fail http://localhost:8080/health; do sleep 2; done'
+
+            - name: Dump Docker Logs
+              if: failure()
+              run: docker compose logs
+
+            - name: Tear Down
+              if: always()
+              run: docker compose down
