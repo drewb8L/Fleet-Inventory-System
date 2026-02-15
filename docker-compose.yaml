@@ -11,4 +11,32 @@
             - ASPNETCORE_ENVIRONMENT=Development
             - ASPNETCORE_HTTP_PORTS=8080
             - ASPNETCORE_HTTPS_PORTS=8081
+            - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+        depends_on:
+            fleet-db:
+                condition: service_healthy
         restart: unless-stopped
+
+    # The Database Service
+    fleet-db:
+        image: postgres:16
+        container_name: fleet_postgres_container
+        environment:
+            - POSTGRES_DB=fleet_inventory_dev
+            - POSTGRES_USER=fleet_dev
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+        ports:
+            - "5433:5432"
+        volumes:
+            - fleet-pgdata:/var/lib/postgresql/data
+        restart: unless-stopped
+
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U fleet_dev || exit 1"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+            start_period: 10s
+
+volumes:
+    fleet-pgdata:
