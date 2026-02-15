@@ -4,6 +4,8 @@ Fleet_Inventory_SRS.md
 *.nostore
 .Ds_Store
 *.DS_Store
+*.env
+.env
 # Created by https://www.toptal.com/developers/gitignore/api/dotnetcore,aspnetcore,csharp
 # Edit at https://www.toptal.com/developers/gitignore?templates=dotnetcore,aspnetcore,csharp
 
